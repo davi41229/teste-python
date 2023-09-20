@@ -1,6 +1,12 @@
-from config import app
+from config import app,db
 
 from flask import render_template
+
+from models import Votos
+
+import os
+
+
 
 #rota de votação
 @app.route('/')
