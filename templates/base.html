@@ -17,17 +17,42 @@
             margin: 200px auto;
 
         }
-        .content> input
+        .content form button
         {
            font-size: 50px;
            margin-top: 100px;
            margin-left: 20px;
         }
+        .contagem
+        {
+            background-color: coral;
+            border: solid 2px #000;
+            border-radius: 8px;
+        }
     </style>
+
     <div class="content">
-        <input  type="button"  name="sim" value="SIM">
-        <input type="button"  name="nao" value="NAO">
+        <form action="/salvar_voto" method="POST">
+            <button type="submit" name="voto" value="sim">Sim</button>
+            <button type="submit" name="voto" value="nao">Não</button>
+        </form>
     </div>
+
+    <h2>Contagem de Votos</h2>
+    <table class="contagem">
+        <tr>
+            <th>Opção</th>
+            <th>Contagem</th>
+        </tr>
+        <tr>
+            <td>Sim</td>
+            <td>{{ vt_s }}</td>
+        </tr>
+        <tr>
+            <td>Não</td>
+            <td>{{ vt_n }}</td>
+        </tr>
+    </table>
 
 </body>
 </html>

@@ -1,11 +1,10 @@
 from config import app,db
 
-from flask import render_template
+from flask import render_template, request, redirect, url_for
 
 from models import Votos
 
 import os
-
 
 
 #rota de votação
@@ -14,14 +13,27 @@ def ola():
     return render_template('base.html')
 
 
-# função que salva os votos
-
 # função que mostra o tatal dos votos
+def count():
+    vt_s = Votos.query.filter_by(voto='sim').count()
+    vt_n = Votos.query.filter_by(voto='nao').count()
+    return vt_s, vt_n
 
-"""
-if __name__ == '__main__':
-    app.run(debug=True)
-"""
+
+# função que salva os votos
+@app.route('/salvar_voto', methods=['POST'])
+def salvar_voto():
+    voto = request.form.get('voto')
+    
+    if voto in ('sim', 'nao'):
+        novo_voto = Votos(voto=voto)
+        db.session.add(novo_voto)
+        db.session.commit()
+    
+    vt_s, vt_n = count()
+    
+    return render_template('base.html', vt_s=vt_s, vt_n=vt_n)
+
 
 
 
