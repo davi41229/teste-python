@@ -15,9 +15,9 @@ def ola():
 
 # função que mostra o tatal dos votos
 def count():
-    vt_s = Votos.query.filter_by(voto='sim').count()
-    vt_n = Votos.query.filter_by(voto='nao').count()
-    return vt_s, vt_n
+    voto_sim = Votos.query.filter_by(voto='sim').count()
+    voto_nao = Votos.query.filter_by(voto='nao').count()
+    return voto_sim, voto_nao
 
 
 # função que salva os votos
@@ -30,9 +30,9 @@ def salvar_voto():
         db.session.add(novo_voto)
         db.session.commit()
     
-    vt_s, vt_n = count()
+    voto_sim, voto_nao = count()
     
-    return render_template('base.html', vt_s=vt_s, vt_n=vt_n)
+    return render_template('base.html', voto_sim=voto_sim, voto_nao=voto_nao)
 
 
 
